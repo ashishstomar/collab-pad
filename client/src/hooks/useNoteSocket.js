@@ -9,6 +9,7 @@ export const useNoteSocket = (note) => {
   const [activeUsers, setActiveUsers] = useState(1);
   const [isDirty, setIsDirty] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [lastModified, setLastModified] = useState(0);
 
   const socketRef = useRef(null);
   const debounceRef = useRef(null);
@@ -17,6 +18,7 @@ export const useNoteSocket = (note) => {
     if (note) {
       setTitle(note.title);
       setContent(note.content);
+      setLastModified(note.lastModified);
     }
   }, [note]);
 
@@ -25,7 +27,10 @@ export const useNoteSocket = (note) => {
       const interval = setInterval(() => {
         setIsSaving(true);
         updateNoteInDB(note._id, title, content)
-          .then(() => setIsDirty(false))
+          .then((data) => {
+            setIsDirty(false);
+            setLastModified(data.note.lastModified);
+          })
           .catch((err) => console.error("Auto-save failed:", err))
           .finally(() => setIsSaving(false));
       }, 5000);
@@ -80,6 +85,7 @@ export const useNoteSocket = (note) => {
   return {
     title,
     content,
+    lastModified,
     activeUsers,
     isSaving,
     isDirty,

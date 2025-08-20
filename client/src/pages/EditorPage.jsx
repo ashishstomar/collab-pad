@@ -68,8 +68,12 @@ const EditorPage = () => {
           value={socketData.content}
           onChange={(e) => socketData.handleContentChange(e.target.value)}
           placeholder="Start collaborating..."
-          className="w-full h-full p-4 resize-y bg-white border-2 border-black shadow-[8px_8px_0_0_#000] focus:outline-none text-black text-lg leading-relaxed font-mono"
+          className="w-full h-100 p-4 resize-y bg-white border-2 border-black shadow-[8px_8px_0_0_#000] focus:outline-none text-black text-lg font-mono"
         />
+
+        <p className="p-4 font-mono">
+          Last Modified: {new Date(socketData.lastModified).toLocaleString()}
+        </p>
       </main>
     </div>
   );
