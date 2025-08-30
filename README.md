@@ -1,6 +1,6 @@
 # Collab-Pad
 
-A real-time collaborative note-taking application built with React and Node.js.
+A real-time collaborative note-taking application built with React and Node.js. Powered by WebSockets, any change made by one user instantly syncs across all connected clients in real time.
 
 ## Project Structure
 
@@ -30,7 +30,7 @@ Copy the example environment files and fill in your values:
 ```env
 # filepath: server/.env.example
 PORT=5000
-MONGO_URI="mongodb://localhost:27017/collaborative-notes"
+MONGO_URI="mongodb://localhost:27017/collab-pad"
 ```
 
 #### Frontend (`client/.env.example`)
